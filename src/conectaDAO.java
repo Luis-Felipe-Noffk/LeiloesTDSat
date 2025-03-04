@@ -27,7 +27,7 @@ public class conectaDAO {
                     "root", // usuario do mysql
                     "Godisgay2801"// senha do mysql
             );
-            JOptionPane.showMessageDialog(null, "Conexão realizada com sucesso!");
+            System.out.println("Conexão realizada com sucesso!");
             
         } catch (SQLException erro){
             JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
@@ -39,7 +39,7 @@ public class conectaDAO {
             try {
                 if(conn != null){
                     conn.close();
-                    JOptionPane.showMessageDialog(null, "Conexão encerrada com sucesso!");               
+                    System.out.println("Conexão encerrada com sucesso!");               
                 }
             }catch (SQLException erro){
                 JOptionPane.showMessageDialog(null, "Erro a encerrar a conexão" + erro.getMessage());
