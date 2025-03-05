@@ -83,8 +83,35 @@ public class ProdutosDAO {
         return listagem;  // Retornar a lista de produtos
     }
     
-    
-    
-        
+    // Método para marcar um produto como vendido
+    public void venderProduto(int idProduto) {
+        String sql = "UPDATE produto SET status = ? WHERE id = ?";
+
+        try {
+            conn = new conectaDAO().connectDB();
+            prep = conn.prepareStatement(sql);
+            prep.setString(1, "Vendido");
+            prep.setInt(2, idProduto);
+
+            int linhasAfetadas = prep.executeUpdate();
+            if (linhasAfetadas > 0) {
+                JOptionPane.showMessageDialog(null, "Produto vendido com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Produto não encontrado!");
+            }
+
+        } catch (HeadlessException | SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao vender produto: " + erro.getMessage());
+        } finally {
+            try {
+                if (prep != null) {
+                    prep.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao fechar recursos: " + e.getMessage());
+            }
+            new conectaDAO().fecharConexao(conn);
+        }
+    }     
 }
 
